@@ -5,11 +5,17 @@ dns.setServers(['8.8.8.8', '8.8.4.4']);
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const Routes = require("./routes/Routes");
 
 const app = express();
 
 app.use(express.json());
+app.use(
+  cors({
+    origin: "https://appiahboahenemmanuely26se2210.vercel.app",
+  })
+);
 
 app.get("/", (req, res) => {
   res.json({ message: "API is running" });
