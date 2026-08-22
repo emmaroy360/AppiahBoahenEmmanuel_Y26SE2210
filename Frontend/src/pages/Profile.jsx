@@ -11,22 +11,29 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    let mounted = true;
-    api
-      .get("/profile")
-      .then((res) => mounted && setProfile(res.data.user))
-      .catch(
-        (err) =>
-          mounted &&
-          setError(err.response?.data?.message || "Could not load profile.")
-      )
-      .finally(() => mounted && setLoading(false));
-    return () => {
-      mounted = false;
-    };
-  }, []);
+useEffect(() => {
+  let mounted = true;
 
+  const token = localStorage.getItem("token");
+
+  api
+    .get("/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => mounted && setProfile(res.data.user))
+    .catch(
+      (err) =>
+        mounted &&
+        setError(err.response?.data?.message || "Could not load profile.")
+    )
+    .finally(() => mounted && setLoading(false));
+
+  return () => {
+    mounted = false;
+  };
+}, []);
   if (loading) return <AnimateLoading label="Loading your profile..." />;
 
   if (error) {
