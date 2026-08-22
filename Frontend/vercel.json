@@ -5,8 +5,8 @@
       "destination": "https://appiahboahen-backend.onrender.com/api/:path*"
     },
     {
-      "source": "/(.*)",
-      "destination": "/"
+      "source": "/:path*",
+      "destination": "/index.html"
     }
   ]
 }
