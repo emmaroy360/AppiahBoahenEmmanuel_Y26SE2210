@@ -13,7 +13,11 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://appiahboahenemmanuely26se2210.vercel.app",
+    origin: [
+      "https://appiah-boahen-emmanuel-y26-se-2210.vercel.app",
+    ],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
